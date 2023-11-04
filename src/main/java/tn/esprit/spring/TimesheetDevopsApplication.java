@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TimesheetDevopsApplication {
 
 	public static void main(String[] args) {
+		System.out.println("hello");
 		SpringApplication.run(TimesheetDevopsApplication.class, args);
 	}
 
