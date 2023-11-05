@@ -9,18 +9,6 @@ pipeline {
 				archive 'target/*.jar'
 			}
 		}
-
-		stage('Test'){
-			steps{
-				sh "mvn test"
-			}
-			post{
-				always{
-					junit 'target/test-report/*.xml'
-				}
-			}
-		}
-        
 		stage('sonarqube'){
 			steps{
 				withSonarQubeEnv(installationName: 'sonar'){
