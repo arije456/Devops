@@ -5,7 +5,8 @@ pipeline {
 
 		stage('Build'){
 			steps {
-				sh "mvn clean install -DskipTests"
+				sh "mvn clean package -DskipTests=true"
+				archive 'target/*.jar'
 			}
 		}
 
@@ -13,12 +14,17 @@ pipeline {
 			steps{
 				sh "mvn test"
 			}
+			post{
+				always{
+					junit 'target/test-report/*.xml
+				}
+			}
 		}
         
 		stage('sonarqube'){
 			steps{
 				withSonarQubeEnv(installationName: 'sonar'){
-				sh "mvn clean sonar:sonar"
+				sh "mvn sonar:sonar"
 				}
 			}
 		}
